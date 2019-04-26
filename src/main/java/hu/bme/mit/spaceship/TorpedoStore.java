@@ -14,6 +14,8 @@ public class TorpedoStore {
 
   private int torpedoCount = 0;
 
+  private Random generator;
+
   public TorpedoStore(int numberOfTorpedos){
     this.torpedoCount = numberOfTorpedos;
 
@@ -26,6 +28,8 @@ public class TorpedoStore {
         FAILURE_RATE = 0.0;
       }
     }
+
+    this.generator = new Random();
   }
 
   public boolean fire(int numberOfTorpedos){
@@ -36,8 +40,7 @@ public class TorpedoStore {
     boolean success = false;
 
     // simulate random overheating of the launcher bay which prevents firing
-    Random generator = new Random();
-    double r = generator.nextDouble();
+    double r = this.generator.nextDouble();
 
     if (r >= FAILURE_RATE) {
       // successful firing
